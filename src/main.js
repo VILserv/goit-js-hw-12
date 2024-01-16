@@ -155,6 +155,7 @@ function clearGallery() {
   currentPage = 1;
   hideLoadMoreBtn();
 }
+currentPage++;
 
 async function loadMore() {
   showLoader();
@@ -168,7 +169,7 @@ async function loadMore() {
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: true,
-        page: currentPage + 1,
+        page: currentPage,
         per_page: 40,
       },
     });
@@ -180,8 +181,6 @@ async function loadMore() {
     if (data.hits.length === 0) {
       return;
     }
-
-    currentPage++;
 
     if (imagesLoaded + data.hits.length > totalHits) {
       data.hits = data.hits.slice(0, totalHits - imagesLoaded);
